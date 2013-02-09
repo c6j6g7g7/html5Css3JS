@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local Storage demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/jquery-1.7.2.min.js"> </script>
+
+    <script type="text/javascript">
+        var localStorageKey = "nameStorage";
+        jQuery(window).ready(function(){
+            showStoreValue();
+            $('#nameList').click(function(e) {
+                localStorage.setItem(localStorageKey, $('#name').val());
+                showStoreValue();
+                e.preventDefault();
+            });
+        });
+
+        function showStoreValue() {
+            var item = localStorage.getItem(localStorageKey);
+            if (item == null) {
+                item = 'No se tienen datos.';
+            }
+            else if (item.length === 0) {
+                item = 'Store contains empty value';
+            }
+            $('.yourName').text(item);
+        }
+    </script>
+</head>
+<body>
+    <h2>Local Storage demo</h2>
+    <form>
+        <input type="text" id="name" name="name" placeholder="Ingrese su nombre"/>
+        <input type="button" id="nameList" value="Almacenar nombre"/>
+    </form>
+    <br/>
+    Dato Almacenado:
+    <ul data-role="listview" data-inset="true">
+        <li class="yourName"/>
+    </ul>
+</body>
+</html>
